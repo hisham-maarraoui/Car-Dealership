@@ -1,5 +1,3 @@
-// pretty much the same as nucampsiteServer, except that we would just have the car route
-
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -10,14 +8,10 @@ const passport = require("passport");
 const config = require("./config");
 
 
-// var indexRouter = require('./routes/index');
 var usersRouter = require("./routes/users");
 const carRouter = require("./routes/carRouter");
 const uploadRouter = require("./routes/uploadRouter");
-// const campsiteRouter = require('./routes/campsiteRouter');
-// const promotionRouter = require('./routes/promotionRouter');
-// const partnerRouter = require('./routes/partnerRouter');
-// const uploadRouter = require('./routes/uploadRouter');
+
 
 const session = require('express-session');
 const mongoose = require("mongoose");
@@ -75,10 +69,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/cars", carRouter);
 app.use("/imageUpload", uploadRouter);
-// app.use('/campsites', campsiteRouter);
-// app.use('/promotions', promotionRouter);
-// app.use('/partners', partnerRouter);
-// app.use('/imageUpload', uploadRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -95,8 +86,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-
 
 
 
