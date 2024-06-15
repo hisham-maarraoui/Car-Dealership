@@ -5,12 +5,12 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     firstname: {
-        type: String,
+        type: String
     },
     lastname: {
-        type: String,
-        facebookId: String,
-    }
+        type: String
+    },
+    facebookId: String,
 });
 
 userSchema.plugin(passportLocalMongoose);
