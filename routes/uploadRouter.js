@@ -29,7 +29,6 @@ uploadRouter
   .get(
     cors.cors,
     authenticate.verifyUser,
-    authenticate.verifyAdmin,
     (req, res) => {
       res.statusCode = 403;
       res.end("GET operation not supported on /imageUpload");
@@ -38,7 +37,6 @@ uploadRouter
   .post(
     cors.corsWithOptions,
     authenticate.verifyUser,
-    authenticate.verifyAdmin,
     upload.single("imageFile"),
     (req, res) => {
       res.statusCode = 200;
@@ -49,7 +47,6 @@ uploadRouter
   .put(
     cors.corsWithOptions,
     authenticate.verifyUser,
-    authenticate.verifyAdmin,
     (req, res) => {
       res.statusCode = 403;
       res.end("PUT operation not supported on /imageUpload");
@@ -58,7 +55,6 @@ uploadRouter
   .delete(
     cors.corsWithOptions,
     authenticate.verifyUser,
-    authenticate.verifyAdmin,
     (req, res) => {
       res.statusCode = 403;
       res.end("DELETE operation not supported on /imageUpload");

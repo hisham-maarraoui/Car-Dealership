@@ -5,19 +5,23 @@ var express = require("express");
 var path = require("path");
 var logger = require("morgan");
 
+
 const passport = require("passport");
 const config = require("./config");
 
+
 // var indexRouter = require('./routes/index');
 var usersRouter = require("./routes/users");
-const carRouter = require("./routes/car");
+const carRouter = require("./routes/carRouter");
 const uploadRouter = require("./routes/uploadRouter");
 // const campsiteRouter = require('./routes/campsiteRouter');
 // const promotionRouter = require('./routes/promotionRouter');
 // const partnerRouter = require('./routes/partnerRouter');
 // const uploadRouter = require('./routes/uploadRouter');
 
+const session = require('express-session');
 const mongoose = require("mongoose");
+const FileStore = require('session-file-store')(session);
 
 const url = config.mongoUrl;
 const connect = mongoose.connect(url, {});
@@ -54,7 +58,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
 
-app.use("/", indexRouter);
+// app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -81,5 +85,16 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
+
+
+app.use(session({
+  name: 'session-id',
+  secret: '12345-67890-09876-54321',
+  saveUninitialized: false,
+  resave: false,
+  store: new FileStore()
+}));
+
+
 
 module.exports = app;
